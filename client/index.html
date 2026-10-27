@@ -362,8 +362,29 @@
               <h2 id="tasks-title">Project Sprint Board</h2>
               <p class="section-subtitle" id="tasks-subtitle">Organize sprint tasks, priorities, and implementation status.</p>
             </div>
-            <button class="btn btn-primary" id="new-task-btn">
-              <i data-lucide="plus-circle"></i> Add Task
+            <div style="display: flex; gap: 0.6rem; align-items: center;">
+              <button class="btn btn-outline hidden" id="submit-project-toolbar-btn">
+                <i data-lucide="send"></i> Submit Project
+              </button>
+              <button class="btn btn-primary" id="new-task-btn">
+                <i data-lucide="plus-circle"></i> Add Task
+              </button>
+            </div>
+          </div>
+
+          <!-- All Tasks Done Celebration & Submission Banner -->
+          <div class="sprint-complete-banner hidden" id="sprint-complete-banner">
+            <div class="banner-left">
+              <div class="banner-icon-badge">
+                <i data-lucide="trophy"></i>
+              </div>
+              <div class="banner-text">
+                <h3>All Sprint Tasks Are Done! 🎉</h3>
+                <p>Every milestone has been pushed to the Done list. You are ready to make the final Hackathon submission.</p>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-submit-glow" id="banner-submit-btn">
+              <i data-lucide="send"></i> Submit Final Project Now
             </button>
           </div>
 
@@ -544,6 +565,46 @@
       </div>
       <button type="submit" class="btn btn-primary btn-block">
         <i data-lucide="save"></i> Save Changes
+      </button>
+    </form>
+  </div>
+
+  <!-- Final Project Submission Modal -->
+  <div class="modal hidden" id="submission-modal">
+    <button class="modal-close" data-close="#submission-modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-icon submission-glow"><i data-lucide="trophy"></i></div>
+      <h3>Final Hackathon Submission</h3>
+      <p>All tasks are Done! Provide your project pitch and links for judging.</p>
+    </div>
+    <form id="submission-form" class="modal-form">
+      <div class="form-group">
+        <label for="sub-title">1) Project Title</label>
+        <div class="input-wrapper">
+          <i data-lucide="folder"></i>
+          <input type="text" id="sub-title" placeholder="e.g. Synapse Autonomous Agent" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sub-desc">2) Project Description & Problem Solved</label>
+        <textarea id="sub-desc" rows="4" placeholder="Explain what problem your project solves, technologies used, and architecture..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="sub-video">3) Demo Video Link (YouTube / Loom / Drive)</label>
+        <div class="input-wrapper">
+          <i data-lucide="video"></i>
+          <input type="url" id="sub-video" placeholder="https://www.youtube.com/watch?v=... or Loom" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sub-repo">4) GitHub Repository URL</label>
+        <div class="input-wrapper">
+          <i data-lucide="github"></i>
+          <input type="url" id="sub-repo" placeholder="https://github.com/username/project" required />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-submit-glow">
+        <i data-lucide="award"></i> Submit Project to Judges
       </button>
     </form>
   </div>

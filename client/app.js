@@ -140,15 +140,31 @@ async function loadProjects() {
     projects.forEach(p => {
       const card = document.createElement('div');
       card.className = 'project-card';
+
+      const badgeHtml = p.isSubmitted 
+        ? `<span class="project-submitted-badge"><i data-lucide="award"></i> Submitted</span>` 
+        : `<span class="project-badge">Active Prototype</span>`;
+
+      let linksHtml = '';
+      if (p.demoUrl || p.repoUrl) {
+        linksHtml = `
+          <div class="project-submission-links">
+            ${p.repoUrl ? `<a href="${escapeHtml(p.repoUrl)}" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()"><i data-lucide="github"></i> Repo</a>` : ''}
+            ${p.demoUrl ? `<a href="${escapeHtml(p.demoUrl)}" target="_blank" class="proj-link-btn" onclick="event.stopPropagation()"><i data-lucide="video"></i> Demo Video</a>` : ''}
+          </div>
+        `;
+      }
+
       card.innerHTML = `
         <div class="project-card-header">
-          <span class="project-badge">Active Prototype</span>
+          ${badgeHtml}
           <div class="project-card-actions">
             <button class="project-delete-btn" title="Delete Project"><i data-lucide="trash-2"></i></button>
           </div>
         </div>
         <h3>${escapeHtml(p.name)}</h3>
         <p>${escapeHtml(p.description || 'No description provided for this hackathon build.')}</p>
+        ${linksHtml}
         <div class="project-card-footer">
           <span>Sprint Tasks Board</span>
           <span class="project-open-link">Open Sprint Board <i data-lucide="arrow-right"></i></span>
@@ -311,6 +327,26 @@ async function loadTasks(project) {
     qs('#count-in-progress').textContent = inProgressCount;
     qs('#count-done').textContent = doneCount;
 
+    // Check if ALL tasks are in "Done" and at least 1 task exists
+    const totalTasks = tasks.length;
+    const allDone = totalTasks > 0 && doneCount === totalTasks;
+
+    const banner = qs('#sprint-complete-banner');
+    const toolbarSubmitBtn = qs('#submit-project-toolbar-btn');
+
+    if (allDone) {
+      show(banner);
+      show(toolbarSubmitBtn);
+    } else {
+      hide(banner);
+      if (currentProject && currentProject.isSubmitted) {
+        show(toolbarSubmitBtn);
+        toolbarSubmitBtn.innerHTML = '<i data-lucide="check-circle-2"></i> Update Submission';
+      } else {
+        hide(toolbarSubmitBtn);
+      }
+    }
+
     hide(qs('#projects-section'));
     show(qs('#tasks-section'));
     refreshIcons();
@@ -351,6 +387,16 @@ function openEditTaskModal(task) {
   qs('#edit-task-status').value = task.status || 'todo';
   qs('#edit-task-priority').value = task.priority || 'medium';
   openModal('#edit-task-modal');
+}
+
+// Open Submission Modal
+function openSubmissionModal(project) {
+  if (!project) return;
+  qs('#sub-title').value = project.name || '';
+  qs('#sub-desc').value = project.description || '';
+  qs('#sub-video').value = project.demoUrl || '';
+  qs('#sub-repo').value = project.repoUrl || '';
+  openModal('#submission-modal');
 }
 
 async function createTask(title, description, status, priority) {
@@ -571,6 +617,49 @@ function setupListeners() {
       await loadTasks(currentProject);
     } catch (err) {
       alert(`Failed to update task: ${err.message}`);
+    }
+  });
+
+  // Final Project Submission Triggers
+  const bannerSubmitBtn = qs('#banner-submit-btn');
+  if (bannerSubmitBtn) {
+    bannerSubmitBtn.addEventListener('click', () => openSubmissionModal(currentProject));
+  }
+
+  const toolbarSubmitBtn = qs('#submit-project-toolbar-btn');
+  if (toolbarSubmitBtn) {
+    toolbarSubmitBtn.addEventListener('click', () => openSubmissionModal(currentProject));
+  }
+
+  // Submission Form Submit
+  qs('#submission-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!currentProject) return;
+
+    const name = qs('#sub-title').value.trim();
+    const description = qs('#sub-desc').value.trim();
+    const demoUrl = qs('#sub-video').value.trim();
+    const repoUrl = qs('#sub-repo').value.trim();
+
+    try {
+      const { data: updated } = await api(`/projects/${currentProject._id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          name,
+          description,
+          demoUrl,
+          repoUrl,
+          isSubmitted: true,
+          submittedAt: new Date(),
+        }),
+      });
+      currentProject = updated;
+      closeModal('#submission-modal');
+      alert('🏆 Project Submitted! Your hackathon entry with title, description, demo video, and GitHub repo has been recorded for the judges.');
+      await loadTasks(currentProject);
+      await loadProjects();
+    } catch (err) {
+      alert(`Submission failed: ${err.message}`);
     }
   });
 
