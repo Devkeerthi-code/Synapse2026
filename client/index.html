@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synapse Hackathon 2026 – Official Workspace & Project Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span class="live-dot"></span>
+    <span class="announcement-text"><strong>SYNAPSE 2026 IS LIVE!</strong> Submissions close in <span id="ticker-time">36h 42m</span>. Good luck hackers!</span>
+    <a href="#tracks-section" class="announcement-link">Explore Tracks &rarr;</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo-icon">
+        <i data-lucide="zap"></i>
+      </div>
+      <div class="brand-text">
+        <span class="logo-title">SYNAPSE <span class="logo-accent">2026</span></span>
+        <span class="logo-sub">GLOBAL HACKATHON</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <button class="nav-link active" data-tab="home"><i data-lucide="flame"></i> Hackathon Hub</button>
+      <button class="nav-link" data-tab="tracks"><i data-lucide="layers"></i> Tracks & Prizes</button>
+      <button class="nav-link" data-tab="schedule"><i data-lucide="calendar"></i> Schedule</button>
+      <button class="nav-link" data-tab="workspace" id="nav-workspace-btn"><i data-lucide="layout-grid"></i> Project Workspace</button>
+    </nav>
+
+    <div class="nav-actions">
+      <!-- Unauthenticated Nav -->
+      <div class="nav-auth" id="auth-nav">
+        <button class="btn btn-outline" id="login-btn"><i data-lucide="log-in"></i> Hacker Login</button>
+        <button class="btn btn-primary" id="register-btn"><i data-lucide="user-plus"></i> Register Team</button>
+      </div>
+
+      <!-- Authenticated Nav -->
+      <div class="nav-user hidden" id="user-nav">
+        <div class="user-chip">
+          <div class="user-avatar"><i data-lucide="user"></i></div>
+          <span id="user-email" class="user-email"></span>
+        </div>
+        <button class="btn btn-icon" id="logout-btn" title="Logout"><i data-lucide="log-out"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main">
+
+    <!-- ==================== HOME / HERO TAB ==================== -->
+    <div class="tab-pane active" id="pane-home">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-badge">
+          <i data-lucide="sparkles"></i> Annual Flagship Hackathon • 48-Hour Sprint
+        </div>
+        <h1 class="hero-title">
+          Build the Next Big Thing at <br />
+          <span class="gradient-text">SYNAPSE HACKATHON 2026</span>
+        </h1>
+        <p class="hero-desc">
+          Join over 1,500 builders, developers, designers, and innovators across the globe. 
+          Manage your hackathon team, track live milestones, and build project prototypes ready for judging.
+        </p>
+
+        <!-- Hackathon Countdown Timer -->
+        <div class="countdown-container">
+          <div class="countdown-label">
+            <i data-lucide="clock"></i> SUBMISSION DEADLINE COUNTDOWN
+          </div>
+          <div class="countdown-grid">
+            <div class="countdown-card">
+              <span class="countdown-val" id="cd-hours">36</span>
+              <span class="countdown-unit">Hours</span>
+            </div>
+            <div class="countdown-colon">:</div>
+            <div class="countdown-card">
+              <span class="countdown-val" id="cd-mins">42</span>
+              <span class="countdown-unit">Minutes</span>
+            </div>
+            <div class="countdown-colon">:</div>
+            <div class="countdown-card">
+              <span class="countdown-val" id="cd-secs">18</span>
+              <span class="countdown-unit">Seconds</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" id="hero-workspace-btn">
+            <i data-lucide="rocket"></i> Launch Project Workspace
+          </button>
+          <button class="btn btn-glass btn-lg" id="hero-schedule-btn">
+            <i data-lucide="calendar"></i> View Hackathon Schedule
+          </button>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-icon"><i data-lucide="trophy"></i></div>
+            <div class="stat-info">
+              <span class="stat-num">$50,000</span>
+              <span class="stat-text">Total Prize Pool</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-icon"><i data-lucide="users"></i></div>
+            <div class="stat-info">
+              <span class="stat-num">1,500+</span>
+              <span class="stat-text">Registered Hackers</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-icon"><i data-lucide="cpu"></i></div>
+            <div class="stat-info">
+              <span class="stat-num">5 Tracks</span>
+              <span class="stat-text">Cutting-Edge Tech</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-icon"><i data-lucide="award"></i></div>
+            <div class="stat-info">
+              <span class="stat-num">30+ Judges</span>
+              <span class="stat-text">Industry Leaders</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Feature Highlights -->
+      <section class="section-overview">
+        <div class="section-header">
+          <h2>All-in-One Hackathon Command Center</h2>
+          <p>Everything your squad needs to go from concept to winning pitch demo.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-cyan"><i data-lucide="folder-kanban"></i></div>
+            <h3>Project Workspace</h3>
+            <p>Create your team project, attach pitch notes, and coordinate development in one synced dashboard.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-purple"><i data-lucide="check-square"></i></div>
+            <h3>Kanban Task Sprint</h3>
+            <p>Track sprints with To-Do, In Progress, and Completed task states plus high, medium, and low priority tags.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-amber"><i data-lucide="shield-check"></i></div>
+            <h3>Direct Judging Ready</h3>
+            <p>Keep your project milestone progress documented so mentors and judges can evaluate your build effortlessly.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== TRACKS & PRIZES TAB ==================== -->
+    <div class="tab-pane" id="pane-tracks">
+      <section class="tracks-section" id="tracks-section">
+        <div class="section-header">
+          <div class="tag-badge"><i data-lucide="trophy"></i> COMPETITION TRACKS</div>
+          <h2>Select Your Innovation Track</h2>
+          <p>Compete in specialized tracks with dedicated mentor support and prize categories.</p>
+        </div>
+
+        <div class="tracks-grid">
+          <div class="track-card">
+            <div class="track-header">
+              <span class="track-icon"><i data-lucide="bot"></i></span>
+              <span class="track-prize">$15,000 First Prize</span>
+            </div>
+            <h3>AI & Autonomous Agents</h3>
+            <p>Harness LLMs, multi-agent frameworks, computer vision, and cognitive systems to automate complex real-world workflows.</p>
+            <div class="track-tags">
+              <span>LangChain</span>
+              <span>Gemini</span>
+              <span>Autonomous Agents</span>
+            </div>
+          </div>
+
+          <div class="track-card">
+            <div class="track-header">
+              <span class="track-icon"><i data-lucide="shield"></i></span>
+              <span class="track-prize">$10,000 First Prize</span>
+            </div>
+            <h3>Web3 & Decentralized Tech</h3>
+            <p>Build next-gen decentralized apps, verifiable credentials, zero-knowledge proofs, and tokenized ecosystem tools.</p>
+            <div class="track-tags">
+              <span>Smart Contracts</span>
+              <span>ZK Proofs</span>
+              <span>DeFi</span>
+            </div>
+          </div>
+
+          <div class="track-card">
+            <div class="track-header">
+              <span class="track-icon"><i data-lucide="activity"></i></span>
+              <span class="track-prize">$10,000 First Prize</span>
+            </div>
+            <h3>HealthTech & BioInformatics</h3>
+            <p>Revolutionize diagnostics, preventative care, patient records, and accessible healthcare accessibility.</p>
+            <div class="track-tags">
+              <span>Telemedicine</span>
+              <span>IoT Wearables</span>
+              <span>BioData</span>
+            </div>
+          </div>
+
+          <div class="track-card">
+            <div class="track-header">
+              <span class="track-icon"><i data-lucide="globe"></i></span>
+              <span class="track-prize">$8,000 First Prize</span>
+            </div>
+            <h3>CleanTech & Sustainability</h3>
+            <p>Create impactful software for carbon tracking, renewable energy grid optimization, and waste reduction.</p>
+            <div class="track-tags">
+              <span>Green Energy</span>
+              <span>Smart Grids</span>
+              <span>ESG Metrics</span>
+            </div>
+          </div>
+
+          <div class="track-card highlight-card">
+            <div class="track-header">
+              <span class="track-icon"><i data-lucide="code"></i></span>
+              <span class="track-prize">$7,000 First Prize</span>
+            </div>
+            <h3>Open Innovation & DevTools</h3>
+            <p>Build revolutionary developer tooling, IDE enhancements, performance profilers, and open-source infrastructure.</p>
+            <div class="track-tags">
+              <span>CLI Tools</span>
+              <span>SDKs</span>
+              <span>Productivity</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== SCHEDULE TAB ==================== -->
+    <div class="tab-pane" id="pane-schedule">
+      <section class="schedule-section">
+        <div class="section-header">
+          <div class="tag-badge"><i data-lucide="calendar"></i> 48-HOUR TIMELINE</div>
+          <h2>Hackathon Schedule & Milestones</h2>
+          <p>Don't miss key mentor check-ins, workshops, and submission deadlines.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item past">
+            <div class="timeline-marker"><i data-lucide="check"></i></div>
+            <div class="timeline-content">
+              <div class="timeline-time">Day 1 • 09:00 AM UTC</div>
+              <h3>Opening Ceremony & Keynote</h3>
+              <p>Welcome address, track reveals, and sponsor API announcements.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item past">
+            <div class="timeline-marker"><i data-lucide="check"></i></div>
+            <div class="timeline-content">
+              <div class="timeline-time">Day 1 • 11:00 AM UTC</div>
+              <h3>Hacking Officially Commences</h3>
+              <p>Team registration lock and workspace provisioning.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item active">
+            <div class="timeline-marker"><i data-lucide="flame"></i></div>
+            <div class="timeline-content">
+              <div class="timeline-badge">CURRENT STAGE</div>
+              <div class="timeline-time">Day 2 • 02:00 PM UTC</div>
+              <h3>Mid-Point Mentor Check-In</h3>
+              <p>1-on-1 breakout sessions with industry technical mentors to unblock architectures.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"><i data-lucide="clock"></i></div>
+            <div class="timeline-content">
+              <div class="timeline-time">Day 2 • 11:59 PM UTC</div>
+              <h3>Soft Submission & Video Pitch Upload</h3>
+              <p>Ensure repository and project preview are uploaded in your Workspace.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"><i data-lucide="trophy"></i></div>
+            <div class="timeline-content">
+              <div class="timeline-time">Day 3 • 03:00 PM UTC</div>
+              <h3>Final Demo Day & Awards Ceremony</h3>
+              <p>Top 10 finalists live pitch to judge panel followed by prize distributions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== WORKSPACE TAB ==================== -->
+    <div class="tab-pane" id="pane-workspace">
+      <!-- Unauthenticated State Alert -->
+      <div class="workspace-auth-gate" id="workspace-gate">
+        <div class="gate-card">
+          <div class="gate-icon"><i data-lucide="lock"></i></div>
+          <h2>Hackathon Workspace Access</h2>
+          <p>Please log in or register your team account to view your hackathon projects and sprint tasks.</p>
+          <div class="gate-buttons">
+            <button class="btn btn-primary" id="gate-login-btn"><i data-lucide="log-in"></i> Sign In to Account</button>
+            <button class="btn btn-outline" id="gate-register-btn"><i data-lucide="user-plus"></i> Register New Team</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Authenticated Workspace Area -->
+      <div class="workspace-content hidden" id="workspace-content">
+        
+        <!-- Projects View -->
+        <section class="section" id="projects-section">
+          <div class="workspace-toolbar">
+            <div>
+              <h2>Your Hackathon Projects</h2>
+              <p class="section-subtitle">Manage project repositories, track ideas, and collaborate on your hackathon entry.</p>
+            </div>
+            <button class="btn btn-primary" id="new-project-btn">
+              <i data-lucide="plus-circle"></i> Create New Project
+            </button>
+          </div>
+
+          <div class="projects-grid" id="projects-list">
+            <!-- Dynamic project cards injected by JS -->
+          </div>
+        </section>
+
+        <!-- Tasks View -->
+        <section class="section hidden" id="tasks-section">
+          <div class="workspace-toolbar">
+            <div>
+              <button class="btn btn-ghost" id="back-to-projects">
+                <i data-lucide="arrow-left"></i> Back to Projects
+              </button>
+              <h2 id="tasks-title">Project Sprint Board</h2>
+              <p class="section-subtitle" id="tasks-subtitle">Organize sprint tasks, priorities, and implementation status.</p>
+            </div>
+            <button class="btn btn-primary" id="new-task-btn">
+              <i data-lucide="plus-circle"></i> Add Task
+            </button>
+          </div>
+
+          <!-- Tasks Kanban / List -->
+          <div class="tasks-board">
+            <div class="kanban-col">
+              <div class="col-header todo">
+                <span class="col-title"><i data-lucide="circle"></i> To-Do</span>
+                <span class="col-count" id="count-todo">0</span>
+              </div>
+              <div class="cards-list" id="list-todo"></div>
+            </div>
+
+            <div class="kanban-col">
+              <div class="col-header in-progress">
+                <span class="col-title"><i data-lucide="loader"></i> In Progress</span>
+                <span class="col-count" id="count-in-progress">0</span>
+              </div>
+              <div class="cards-list" id="list-in-progress"></div>
+            </div>
+
+            <div class="kanban-col">
+              <div class="col-header done">
+                <span class="col-title"><i data-lucide="check-circle-2"></i> Done</span>
+                <span class="col-count" id="count-done">0</span>
+              </div>
+              <div class="cards-list" id="list-done"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+  <div class="overlay hidden" id="modal-overlay"></div>
+
+  <!-- Auth Modal -->
+  <div class="modal hidden" id="auth-modal">
+    <button class="modal-close" data-close="#auth-modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-icon"><i data-lucide="shield-check"></i></div>
+      <h3 id="auth-modal-title">Sign In to TaskFlow</h3>
+      <p id="auth-modal-subtitle">Enter your hackathon team credentials</p>
+    </div>
+    <form id="auth-form" class="modal-form">
+      <div class="form-group hidden" id="group-name">
+        <label for="name">Team / Developer Name</label>
+        <div class="input-wrapper">
+          <i data-lucide="user"></i>
+          <input type="text" id="name" placeholder="e.g. CyberPioneers" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <i data-lucide="mail"></i>
+          <input type="email" id="email" placeholder="hacker@hackflow.dev" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <i data-lucide="key"></i>
+          <input type="password" id="password" placeholder="••••••••" required />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="auth-submit-btn">
+        <i data-lucide="arrow-right"></i> Continue
+      </button>
+    </form>
+    <p class="modal-toggle" id="auth-toggle">
+      Need to register a team? <a href="#" id="toggle-link">Create Account</a>
+    </p>
+  </div>
+
+  <!-- New Project Modal -->
+  <div class="modal hidden" id="project-modal">
+    <button class="modal-close" data-close="#project-modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-icon"><i data-lucide="folder-plus"></i></div>
+      <h3>Launch Hackathon Project</h3>
+      <p>Give your build a memorable name and summary</p>
+    </div>
+    <form id="project-form" class="modal-form">
+      <div class="form-group">
+        <label for="project-name">Project Title</label>
+        <input type="text" id="project-name" placeholder="e.g. NeuroSync Agent" required />
+      </div>
+      <div class="form-group">
+        <label for="project-desc">Description & Track</label>
+        <textarea id="project-desc" placeholder="Brief summary of your prototype, targeted track, and key features..." rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <i data-lucide="plus"></i> Create Project
+      </button>
+    </form>
+  </div>
+
+  <!-- New Task Modal -->
+  <div class="modal hidden" id="task-modal">
+    <button class="modal-close" data-close="#task-modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-icon"><i data-lucide="check-square"></i></div>
+      <h3>Add Sprint Task</h3>
+      <p>Assign milestone item to your project board</p>
+    </div>
+    <form id="task-form" class="modal-form">
+      <div class="form-group">
+        <label for="task-title">Task Title</label>
+        <input type="text" id="task-title" placeholder="e.g. Implement OAuth and connect MongoDB" required />
+      </div>
+      <div class="form-group">
+        <label for="task-desc">Task Details (Optional)</label>
+        <textarea id="task-desc" placeholder="Technical specifications, API requirements, or checklist..." rows="3"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task-status">Status</label>
+          <select id="task-status">
+            <option value="todo">To-Do</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="task-priority">Priority</label>
+          <select id="task-priority">
+            <option value="low">Low 🛡️</option>
+            <option value="medium" selected>Medium ⚡</option>
+            <option value="high">High 🔥</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <i data-lucide="plus"></i> Add to Sprint
+      </button>
+    </form>
+  </div>
+
+  <!-- Edit Task Modal -->
+  <div class="modal hidden" id="edit-task-modal">
+    <button class="modal-close" data-close="#edit-task-modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-icon"><i data-lucide="edit-3"></i></div>
+      <h3>Update Sprint Task</h3>
+      <p>Modify task details, priority, or status list</p>
+    </div>
+    <form id="edit-task-form" class="modal-form">
+      <input type="hidden" id="edit-task-id" />
+      <div class="form-group">
+        <label for="edit-task-title">Task Title</label>
+        <input type="text" id="edit-task-title" required />
+      </div>
+      <div class="form-group">
+        <label for="edit-task-desc">Task Details</label>
+        <textarea id="edit-task-desc" rows="3"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="edit-task-status">Status List</label>
+          <select id="edit-task-status">
+            <option value="todo">To-Do</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="edit-task-priority">Priority</label>
+          <select id="edit-task-priority">
+            <option value="low">Low 🛡️</option>
+            <option value="medium">Medium ⚡</option>
+            <option value="high">High 🔥</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <i data-lucide="save"></i> Save Changes
+      </button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo-icon small"><i data-lucide="zap"></i></div>
+        <span>SYNAPSE HACKATHON 2026</span>
+      </div>
+      <p class="footer-copy">Built for innovators & builders worldwide. Powered by TaskFlow API.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
